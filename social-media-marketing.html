@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Social Media Marketing – DigitalEdge Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#060F20;--blue:#1A6BF0;--blue-mid:#1557CC;--blue-light:#EBF2FF;--white:#FFFFFF;--gray:#64748B;--border:#E2ECF8;--text:#1A2540;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+  nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:70px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+  nav.scrolled{box-shadow:0 4px 30px rgba(6,15,32,0.08);}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--navy);text-decoration:none;letter-spacing:-0.5px;}
+  .nav-logo span{color:var(--blue);}
+  .nav-links{display:flex;gap:2rem;align-items:center;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--gray);font-size:.93rem;font-weight:500;transition:color .2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--blue);}
+  .nav-links .dropdown{position:relative;}
+  .nav-links .dropdown>a::after{content:' ▾';font-size:.7rem;}
+  .dropdown-menu{display:none;position:absolute;top:calc(100% + 12px);left:0;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.6rem;min-width:220px;box-shadow:0 12px 40px rgba(6,15,32,0.1);}
+  .dropdown:hover .dropdown-menu{display:block;}
+  .dropdown-menu a{display:block;padding:.55rem .9rem;border-radius:8px;color:var(--text);font-size:.88rem;}
+  .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue);}
+  .nav-cta{background:var(--blue);color:var(--white)!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600!important;}
+  .nav-cta:hover{background:var(--blue-mid)!important;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;}
+
+  /* PAGE HERO */
+  .page-hero{padding:130px 6% 80px;background:linear-gradient(145deg,#f8fbff 0%,#eef4ff 60%,#f0f7ff 100%);position:relative;overflow:hidden;}
+  .page-hero::before{content:'';position:absolute;top:-150px;right:-150px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,240,0.1) 0%,transparent 70%);}
+  .breadcrumb{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;}
+  .breadcrumb a{color:var(--blue);text-decoration:none;}
+  .breadcrumb a::after{content:' / ';color:var(--gray);}
+  .page-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .page-hero h1{font-size:clamp(2.2rem,4vw,3.6rem);font-weight:800;letter-spacing:-1.5px;color:var(--navy);line-height:1.1;margin-bottom:1.2rem;}
+  .page-hero h1 em{font-style:normal;color:var(--blue);}
+  .page-hero p{font-size:1.05rem;color:var(--gray);line-height:1.7;margin-bottom:2rem;}
+  .hero-card{background:var(--navy);border-radius:24px;padding:2.5rem;color:white;}
+  .hero-card h3{font-size:1.1rem;margin-bottom:1.5rem;opacity:.7;font-weight:500;}
+  .metric-row{display:flex;gap:1.5rem;margin-bottom:.8rem;}
+  .metric{flex:1;background:rgba(255,255,255,0.07);border-radius:14px;padding:1.2rem;text-align:center;}
+  .metric .num{font-size:1.8rem;font-weight:800;color:var(--blue);font-family:'Syne',sans-serif;}
+  .metric .label{font-size:.75rem;opacity:.6;margin-top:.3rem;}
+  .platform-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem;}
+  .tag{background:rgba(26,107,240,0.25);color:#7EB8FF;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:50px;}
+
+  section{padding:80px 6%;}
+  .section-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.4rem .9rem;border-radius:50px;margin-bottom:1.2rem;}
+  .section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1.2;margin-bottom:1rem;}
+  .section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:520px;}
+  .section-header{margin-bottom:3rem;}
+  .section-header.centered{text-align:center;}
+  .section-header.centered .section-sub{margin:0 auto;}
+
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+  .feature-card{border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+  .feature-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,107,240,0.1);transform:translateY(-4px);}
+  .feature-icon{font-size:2rem;margin-bottom:1rem;}
+  .feature-card h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;}
+  .feature-card p{font-size:.87rem;color:var(--gray);line-height:1.65;}
+
+  .packages-bg{background:var(--navy);}
+  .packages-bg .section-title{color:white;}
+  .packages-bg .section-sub{color:rgba(255,255,255,.6);}
+  .packages-bg .section-tag{background:rgba(26,107,240,.3);color:#7EB8FF;}
+  .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+  .package-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem;position:relative;}
+  .package-card.popular{border-color:var(--blue);background:rgba(26,107,240,.15);}
+  .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:white;font-size:.75rem;font-weight:700;padding:.3rem .9rem;border-radius:50px;white-space:nowrap;}
+  .package-card h3{font-size:1.2rem;color:white;font-weight:700;margin-bottom:.5rem;}
+  .package-price{font-size:2.2rem;font-weight:800;color:var(--blue);font-family:'Syne',sans-serif;margin:.8rem 0;}
+  .package-price span{font-size:.9rem;color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;font-weight:400;}
+  .package-card ul{list-style:none;margin:1.2rem 0 1.8rem;}
+  .package-card ul li{font-size:.87rem;color:rgba(255,255,255,.7);padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;gap:.6rem;}
+  .package-card ul li::before{content:'✓';color:var(--blue);font-weight:700;}
+  .btn-package{display:block;text-align:center;padding:.75rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .25s;}
+  .btn-package-solid{background:var(--blue);color:white;}
+  .btn-package-solid:hover{background:var(--blue-mid);transform:translateY(-2px);}
+  .btn-package-outline{border:1px solid rgba(255,255,255,.25);color:white;}
+  .btn-package-outline:hover{border-color:var(--blue);background:rgba(26,107,240,.2);}
+
+  .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
+  .step{text-align:center;padding:0 .5rem;}
+  .step-num{width:56px;height:56px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin:0 auto 1rem;box-shadow:0 8px 20px rgba(26,107,240,.3);}
+  .step h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;}
+  .step p{font-size:.83rem;color:var(--gray);line-height:1.6;}
+
+  .cta-banner{background:linear-gradient(135deg,var(--navy) 0%,#0A2A6B 100%);border-radius:28px;padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;margin:0 0 80px;position:relative;overflow:hidden;}
+  .cta-banner::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,240,.3) 0%,transparent 70%);}
+  .cta-content{position:relative;z-index:1;}
+  .cta-banner h2{font-size:clamp(1.5rem,2.5vw,2.2rem);color:white;font-weight:800;letter-spacing:-1px;margin-bottom:.6rem;}
+  .cta-banner p{color:rgba(255,255,255,.65);font-size:.95rem;}
+  .cta-btns{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:1;}
+  .btn-primary{background:var(--blue);color:var(--white);padding:.85rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.95rem;transition:all .25s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+  .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,107,240,.3);}
+  .btn-white{background:white;color:var(--blue);padding:.85rem 2rem;border-radius:50px;font-weight:700;text-decoration:none;font-size:.95rem;transition:all .25s;}
+  .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.2);}
+
+  footer{background:var(--navy);color:rgba(255,255,255,.7);padding:70px 6% 30px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+  .footer-brand p{font-size:.88rem;line-height:1.7;max-width:260px;margin-top:1rem;}
+  .footer-social{display:flex;gap:.8rem;margin-top:1.5rem;}
+  .social-icon{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,.6);font-size:.8rem;transition:all .2s;}
+  .social-icon:hover{background:var(--blue);border-color:var(--blue);color:white;}
+  .footer-col h4{font-family:'Syne',sans-serif;font-size:.95rem;color:white;font-weight:700;margin-bottom:1.2rem;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:.7rem;}
+  .footer-col ul li a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.87rem;transition:color .2s;}
+  .footer-col ul li a:hover{color:white;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;display:flex;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:1rem;}
+  .fade-in{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:none;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+  .page-hero-inner{animation:fadeUp .8s ease both;}
+  @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}.page-hero-inner{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr 1fr;}.cta-banner{flex-direction:column;padding:2.5rem;}}
+  @media(max-width:600px){section{padding:60px 5%;}.footer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Digital<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="#" class="active">Services</a>
+      <div class="dropdown-menu">
+        <a href="social-media-marketing.html">📱 Social Media Marketing</a>
+        <a href="seo.html">🔍 SEO Optimization</a>
+        <a href="website-development.html">💻 Website Development</a>
+        <a href="lead-generation.html">🎯 Lead Generation</a>
+      </div>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div style="padding:0 0 2rem;">
+    <div class="breadcrumb"><a href="index.html">Home</a><a href="#">Services</a>Social Media Marketing</div>
+  </div>
+  <div class="page-hero-inner">
+    <div>
+      <div class="section-tag">Social Media Marketing</div>
+      <h1>Turn Followers Into <em>Loyal Customers</em></h1>
+      <p>We build authentic, high-engagement social media presences that grow your audience, boost brand awareness, and drive real business results.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary">Get a Free Strategy Call</a>
+        <a href="portfolio.html" style="display:inline-flex;align-items:center;gap:.5rem;color:var(--blue);font-weight:600;text-decoration:none;font-size:.95rem;">See Case Studies →</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Average Client Results</h3>
+      <div class="metric-row">
+        <div class="metric"><div class="num">4.8x</div><div class="label">Engagement Growth</div></div>
+        <div class="metric"><div class="num">220%</div><div class="label">Follower Increase</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="num">180%</div><div class="label">Reach Boost</div></div>
+        <div class="metric"><div class="num">3.2x</div><div class="label">More DM Leads</div></div>
+      </div>
+      <div class="platform-tags">
+        <span class="tag">Instagram</span><span class="tag">Facebook</span>
+        <span class="tag">LinkedIn</span><span class="tag">YouTube</span><span class="tag">Twitter/X</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="section-header centered fade-in">
+    <div class="section-tag">What's Included</div>
+    <h2 class="section-title">Full-Spectrum Social Media Management</h2>
+    <p class="section-sub">From content creation to community management — we handle everything so you can focus on your business.</p>
+  </div>
+  <div class="features-grid fade-in">
+    <div class="feature-card"><div class="feature-icon">📝</div><h3>Content Creation</h3><p>Scroll-stopping posts, reels, carousels, and stories crafted to reflect your brand voice and drive engagement.</p></div>
+    <div class="feature-card"><div class="feature-icon">📅</div><h3>Content Calendar</h3><p>Strategic posting schedules optimized for peak engagement times across all your platforms.</p></div>
+    <div class="feature-card"><div class="feature-icon">💬</div><h3>Community Management</h3><p>We respond to comments, DMs, and mentions — keeping your audience engaged and your brand responsive.</p></div>
+    <div class="feature-card"><div class="feature-icon">📊</div><h3>Analytics & Reporting</h3><p>Monthly performance reports with insights on reach, engagement, follower growth, and ROI.</p></div>
+    <div class="feature-card"><div class="feature-icon">🎯</div><h3>Paid Social Ads</h3><p>Targeted ad campaigns on Instagram & Facebook designed to maximize your ad spend and drive conversions.</p></div>
+    <div class="feature-card"><div class="feature-icon">🤝</div><h3>Influencer Outreach</h3><p>We identify and collaborate with relevant influencers to amplify your brand reach authentically.</p></div>
+  </div>
+</section>
+
+<section class="packages-bg">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Transparent Packages</h2>
+    <p class="section-sub">No hidden fees. Choose the plan that fits your goals and budget.</p>
+  </div>
+  <div class="packages-grid fade-in">
+    <div class="package-card">
+      <h3>Starter</h3>
+      <p style="color:rgba(255,255,255,.5);font-size:.85rem;">For small businesses starting out</p>
+      <div class="package-price">₹15,000<span>/month</span></div>
+      <ul>
+        <li>2 Platforms (Instagram + Facebook)</li>
+        <li>12 Posts per month</li>
+        <li>Basic analytics report</li>
+        <li>Caption & hashtag strategy</li>
+        <li>Monthly strategy call</li>
+      </ul>
+      <a href="contact.html" class="btn-package btn-package-outline">Get Started</a>
+    </div>
+    <div class="package-card popular">
+      <div class="popular-badge">Most Popular</div>
+      <h3>Growth</h3>
+      <p style="color:rgba(255,255,255,.5);font-size:.85rem;">For businesses ready to scale</p>
+      <div class="package-price">₹30,000<span>/month</span></div>
+      <ul>
+        <li>4 Platforms including LinkedIn</li>
+        <li>20 Posts + 8 Stories/month</li>
+        <li>Paid ad management (₹10K budget)</li>
+        <li>Community management</li>
+        <li>Weekly performance reports</li>
+        <li>Bi-weekly strategy calls</li>
+      </ul>
+      <a href="contact.html" class="btn-package btn-package-solid">Get Started</a>
+    </div>
+    <div class="package-card">
+      <h3>Enterprise</h3>
+      <p style="color:rgba(255,255,255,.5);font-size:.85rem;">For high-growth brands</p>
+      <div class="package-price">Custom</div>
+      <ul>
+        <li>All platforms managed</li>
+        <li>Unlimited content creation</li>
+        <li>Full ad management</li>
+        <li>Influencer partnerships</li>
+        <li>Dedicated account manager</li>
+        <li>Daily reporting dashboard</li>
+      </ul>
+      <a href="contact.html" class="btn-package btn-package-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--blue-light);">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Our Process</div>
+    <h2 class="section-title">How We Grow Your Social Presence</h2>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="step"><div class="step-num">1</div><h4>Audit & Research</h4><p>We analyze your current social profiles, competitors, and target audience deeply.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Strategy</h4><p>Build a custom content strategy aligned with your brand voice and business goals.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Create & Schedule</h4><p>Our designers and copywriters produce content and schedule it for peak performance.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Engage & Optimize</h4><p>Monitor, engage with your community, and optimize based on real-time data.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="cta-banner fade-in">
+    <div class="cta-content">
+      <h2>Ready to Dominate Social Media?</h2>
+      <p>Book a free 30-minute strategy session with our social media experts.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-white">Book Free Strategy Call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="color:white;">Digital<span style="color:var(--blue)">Edge</span></a>
+      <p>We help businesses grow through smart, data-driven digital marketing strategies.</p>
+      <div class="footer-social">
+        <a href="#" class="social-icon">IG</a><a href="#" class="social-icon">in</a>
+        <a href="#" class="social-icon">fb</a><a href="#" class="social-icon">▶</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul>
+      <li><a href="social-media-marketing.html">Social Media</a></li>
+      <li><a href="seo.html">SEO</a></li>
+      <li><a href="website-development.html">Web Development</a></li>
+      <li><a href="lead-generation.html">Lead Generation</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Company</h4><ul>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="#">About</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul>
+      <li><a href="mailto:hello@digitaledge.com">hello@digitaledge.com</a></li>
+      <li><a href="tel:+919999999999">+91 99999 99999</a></li>
+      <li><a href="#">New Delhi, India</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 DigitalEdge Agency. All rights reserved.</span><span>Privacy Policy · Terms</span></div>
+</footer>
+<script>
+  window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20));
+  const observer=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+  function toggleMenu(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';if(n.style.display==='flex')n.style.cssText='display:flex;flex-direction:column;position:fixed;top:70px;left:0;width:100%;background:white;padding:1.5rem 6%;gap:1rem;border-top:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:99;';else n.style.cssText='';}
+</script>
+</body>
+</html>

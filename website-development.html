@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Website Development – DigitalEdge Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#060F20;--blue:#1A6BF0;--blue-mid:#1557CC;--blue-light:#EBF2FF;--white:#FFFFFF;--gray:#64748B;--border:#E2ECF8;--text:#1A2540;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+  nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:70px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  nav.scrolled{box-shadow:0 4px 30px rgba(6,15,32,0.08);}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--navy);text-decoration:none;}
+  .nav-logo span{color:var(--blue);}
+  .nav-links{display:flex;gap:2rem;align-items:center;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--gray);font-size:.93rem;font-weight:500;transition:color .2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--blue);}
+  .nav-links .dropdown{position:relative;}
+  .nav-links .dropdown>a::after{content:' ▾';font-size:.7rem;}
+  .dropdown-menu{display:none;position:absolute;top:calc(100% + 12px);left:0;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.6rem;min-width:220px;box-shadow:0 12px 40px rgba(6,15,32,.1);}
+  .dropdown:hover .dropdown-menu{display:block;}
+  .dropdown-menu a{display:block;padding:.55rem .9rem;border-radius:8px;color:var(--text);font-size:.88rem;}
+  .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue);}
+  .nav-cta{background:var(--blue);color:var(--white)!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600!important;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;}
+  section{padding:80px 6%;}
+  .section-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.4rem .9rem;border-radius:50px;margin-bottom:1.2rem;}
+  .section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1.2;margin-bottom:1rem;}
+  .section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:520px;}
+  .section-header{margin-bottom:3rem;}
+  .section-header.centered{text-align:center;}
+  .section-header.centered .section-sub{margin:0 auto;}
+  .page-hero{padding:130px 6% 80px;background:linear-gradient(145deg,#f8fbff 0%,#eef4ff 60%,#f0f7ff 100%);position:relative;overflow:hidden;}
+  .page-hero::before{content:'';position:absolute;top:-150px;right:-150px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,240,.1) 0%,transparent 70%);}
+  .breadcrumb{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;}
+  .breadcrumb a{color:var(--blue);text-decoration:none;}
+  .breadcrumb a::after{content:' / ';color:var(--gray);}
+  .page-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;animation:fadeUp .8s ease both;}
+  .page-hero h1{font-size:clamp(2.2rem,4vw,3.6rem);font-weight:800;letter-spacing:-1.5px;color:var(--navy);line-height:1.1;margin-bottom:1.2rem;}
+  .page-hero h1 em{font-style:normal;color:var(--blue);}
+  .page-hero p{font-size:1.05rem;color:var(--gray);line-height:1.7;margin-bottom:2rem;}
+  .btn-primary{background:var(--blue);color:var(--white);padding:.85rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.95rem;transition:all .25s;}
+  .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);}
+
+  /* BROWSER MOCKUP */
+  .browser-mock{background:white;border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(6,15,32,.15);}
+  .browser-bar{background:#f5f5f5;padding:.7rem 1rem;display:flex;align-items:center;gap:.8rem;border-bottom:1px solid #e0e0e0;}
+  .browser-dots{display:flex;gap:.4rem;}
+  .browser-dots span{width:10px;height:10px;border-radius:50%;}
+  .dot-red{background:#FF5F57;}
+  .dot-yellow{background:#FEBC2E;}
+  .dot-green{background:#28C840;}
+  .browser-url{background:white;border-radius:6px;flex:1;padding:.3rem .8rem;font-size:.75rem;color:var(--gray);border:1px solid #e0e0e0;}
+  .browser-content{background:linear-gradient(135deg,var(--blue-light),#dbeafe);padding:2.5rem;text-align:center;}
+  .mock-hero{background:var(--navy);border-radius:10px;padding:1.5rem;margin-bottom:1rem;color:white;}
+  .mock-hero h4{font-size:1rem;margin-bottom:.4rem;}
+  .mock-hero p{font-size:.75rem;opacity:.6;}
+  .mock-btn{background:var(--blue);color:white;padding:.4rem .9rem;border-radius:50px;font-size:.72rem;display:inline-block;margin-top:.6rem;font-weight:600;}
+  .mock-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;}
+  .mock-card{background:white;border-radius:8px;padding:.8rem;text-align:left;}
+  .mock-card-icon{font-size:1.2rem;margin-bottom:.4rem;}
+  .mock-card p{font-size:.65rem;color:var(--gray);}
+
+  .tech-stack{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+  .tech-pill{background:var(--blue-light);color:var(--blue);font-size:.82rem;font-weight:600;padding:.45rem 1rem;border-radius:50px;border:1px solid rgba(26,107,240,.2);}
+
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+  .feature-card{border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+  .feature-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,107,240,.1);transform:translateY(-4px);}
+  .feature-icon{font-size:2rem;margin-bottom:1rem;}
+  .feature-card h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;}
+  .feature-card p{font-size:.87rem;color:var(--gray);line-height:1.65;}
+
+  .web-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+  .type-card{background:var(--navy);border-radius:20px;padding:2rem;color:white;transition:transform .3s;}
+  .type-card:hover{transform:translateY(-5px);}
+  .type-card .badge{background:rgba(26,107,240,.3);color:#7EB8FF;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:50px;display:inline-block;margin-bottom:1rem;}
+  .type-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.7rem;}
+  .type-card p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6;}
+  .type-price{font-size:1rem;color:var(--blue);font-weight:700;margin-top:1rem;}
+
+  .packages-bg{background:var(--blue-light);}
+  .packages-bg .section-tag{background:white;color:var(--blue);}
+  .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;}
+  .step{text-align:center;}
+  .step-num{width:56px;height:56px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin:0 auto 1rem;box-shadow:0 8px 20px rgba(26,107,240,.3);}
+  .step h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;}
+  .step p{font-size:.83rem;color:var(--gray);line-height:1.6;}
+
+  .cta-banner{background:linear-gradient(135deg,var(--navy) 0%,#0A2A6B 100%);border-radius:28px;padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative;overflow:hidden;}
+  .cta-banner::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,240,.3) 0%,transparent 70%);}
+  .cta-content{position:relative;z-index:1;}
+  .cta-banner h2{font-size:clamp(1.5rem,2.5vw,2.2rem);color:white;font-weight:800;letter-spacing:-1px;margin-bottom:.6rem;}
+  .cta-banner p{color:rgba(255,255,255,.65);font-size:.95rem;}
+  .cta-btns{display:flex;gap:1rem;position:relative;z-index:1;}
+  .btn-white{background:white;color:var(--blue);padding:.85rem 2rem;border-radius:50px;font-weight:700;text-decoration:none;font-size:.95rem;transition:all .25s;}
+  .btn-white:hover{transform:translateY(-2px);}
+  footer{background:var(--navy);color:rgba(255,255,255,.7);padding:70px 6% 30px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+  .footer-brand p{font-size:.88rem;line-height:1.7;max-width:260px;margin-top:1rem;}
+  .footer-social{display:flex;gap:.8rem;margin-top:1.5rem;}
+  .social-icon{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,.6);font-size:.8rem;transition:all .2s;}
+  .social-icon:hover{background:var(--blue);border-color:var(--blue);color:white;}
+  .footer-col h4{font-family:'Syne',sans-serif;font-size:.95rem;color:white;font-weight:700;margin-bottom:1.2rem;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:.7rem;}
+  .footer-col ul li a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.87rem;transition:color .2s;}
+  .footer-col ul li a:hover{color:white;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;display:flex;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:1rem;}
+  .fade-in{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:none;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+  @media(max-width:900px){.nav-links{display:none;}.hamburger{display:flex;}.page-hero-inner{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr 1fr;}.cta-banner{flex-direction:column;padding:2.5rem;}.mock-cards{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){section{padding:60px 5%;}.footer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Digital<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown"><a href="#" class="active">Services</a>
+      <div class="dropdown-menu">
+        <a href="social-media-marketing.html">📱 Social Media Marketing</a>
+        <a href="seo.html">🔍 SEO Optimization</a>
+        <a href="website-development.html">💻 Website Development</a>
+        <a href="lead-generation.html">🎯 Lead Generation</a>
+      </div>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div style="padding:0 0 2rem;"><div class="breadcrumb"><a href="index.html">Home</a><a href="#">Services</a>Website Development</div></div>
+  <div class="page-hero-inner">
+    <div>
+      <div class="section-tag">Website Development</div>
+      <h1>Websites That <em>Work</em> as Hard as You Do</h1>
+      <p>Fast, beautiful, and conversion-optimized websites built to grow your business — from landing pages to full e-commerce stores.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary">Get a Free Quote</a>
+        <a href="portfolio.html" style="display:inline-flex;align-items:center;gap:.5rem;color:var(--blue);font-weight:600;text-decoration:none;font-size:.95rem;">See Our Work →</a>
+      </div>
+      <div class="tech-stack">
+        <span class="tech-pill">WordPress</span><span class="tech-pill">React</span>
+        <span class="tech-pill">Shopify</span><span class="tech-pill">Webflow</span>
+        <span class="tech-pill">Next.js</span><span class="tech-pill">WooCommerce</span>
+      </div>
+    </div>
+    <div class="browser-mock">
+      <div class="browser-bar">
+        <div class="browser-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+        <div class="browser-url">https://yourbusiness.com</div>
+      </div>
+      <div class="browser-content">
+        <div class="mock-hero"><h4>Your Brand Headline Here</h4><p>Compelling subheadline that drives conversions</p><div class="mock-btn">Get Started</div></div>
+        <div class="mock-cards">
+          <div class="mock-card"><div class="mock-card-icon">⚡</div><p>Fast & Optimized</p></div>
+          <div class="mock-card"><div class="mock-card-icon">📱</div><p>Mobile-First</p></div>
+          <div class="mock-card"><div class="mock-card-icon">🎯</div><p>High Converting</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="section-header centered fade-in">
+    <div class="section-tag">What We Build</div>
+    <h2 class="section-title">Every Type of Website</h2>
+    <p class="section-sub">From simple landing pages to complex web applications — we've built them all.</p>
+  </div>
+  <div class="web-types fade-in">
+    <div class="type-card"><div class="badge">Most Popular</div><h3>Business Website</h3><p>Professional multi-page website to establish your online presence and build credibility.</p><div class="type-price">Starting ₹25,000</div></div>
+    <div class="type-card"><div class="badge">High ROI</div><h3>Landing Page</h3><p>Single, highly focused pages designed to convert visitors into leads or customers.</p><div class="type-price">Starting ₹12,000</div></div>
+    <div class="type-card"><div class="badge">E-Commerce</div><h3>Online Store</h3><p>Full-featured e-commerce website with payment gateway, inventory, and order management.</p><div class="type-price">Starting ₹60,000</div></div>
+    <div class="type-card"><div class="badge">Custom</div><h3>Web Application</h3><p>Custom web apps, portals, dashboards, and SaaS platforms built to your specifications.</p><div class="type-price">Custom Quote</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Features</div>
+    <h2 class="section-title">Built-In for Every Project</h2>
+    <p class="section-sub">Every website we build comes packed with performance and conversion essentials.</p>
+  </div>
+  <div class="features-grid fade-in">
+    <div class="feature-card"><div class="feature-icon">⚡</div><h3>Lightning Fast</h3><p>Optimized for 95+ PageSpeed scores. Your visitors never wait, and Google rewards you for it.</p></div>
+    <div class="feature-card"><div class="feature-icon">📱</div><h3>Mobile-First Design</h3><p>Looks and functions perfectly on every device — phone, tablet, and desktop.</p></div>
+    <div class="feature-card"><div class="feature-icon">🔍</div><h3>SEO Ready</h3><p>Clean code, proper structure, schema markup, and meta tags — ready for Google from launch day.</p></div>
+    <div class="feature-card"><div class="feature-icon">🔒</div><h3>Secure & Reliable</h3><p>SSL, regular backups, security hardening, and 99.9% uptime hosting recommendations.</p></div>
+    <div class="feature-card"><div class="feature-icon">✏️</div><h3>Easy to Edit</h3><p>Content management system so you can update text, images, and pages without any coding.</p></div>
+    <div class="feature-card"><div class="feature-icon">📊</div><h3>Analytics Integrated</h3><p>Google Analytics and conversion tracking installed so you can measure everything from day one.</p></div>
+  </div>
+</section>
+
+<section class="packages-bg">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Our Process</div>
+    <h2 class="section-title">From Brief to Launch in 4 Weeks</h2>
+    <p class="section-sub">A streamlined development process with clear milestones and zero surprises.</p>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="step"><div class="step-num">1</div><h4>Discovery</h4><p>We understand your goals, audience, and brand to plan the perfect website strategy.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Design</h4><p>Custom wireframes and visual designs for your approval before any coding begins.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Develop</h4><p>We build your site with clean, fast code and integrate all required functionality.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Launch & Support</h4><p>Testing, launch, training, and 30 days of free post-launch support.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="cta-banner fade-in">
+    <div class="cta-content">
+      <h2>Let's Build Something Great Together</h2>
+      <p>Get a free consultation and quote for your website project.</p>
+    </div>
+    <div class="cta-btns"><a href="contact.html" class="btn-white">Get Free Quote</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="nav-logo" style="color:white;font-family:'Syne',sans-serif;font-weight:800;text-decoration:none;">Digital<span style="color:var(--blue)">Edge</span></a><p>We help businesses grow through smart, data-driven digital marketing strategies.</p><div class="footer-social"><a href="#" class="social-icon">IG</a><a href="#" class="social-icon">in</a><a href="#" class="social-icon">fb</a><a href="#" class="social-icon">▶</a></div></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="social-media-marketing.html">Social Media</a></li><li><a href="seo.html">SEO</a></li><li><a href="website-development.html">Web Development</a></li><li><a href="lead-generation.html">Lead Generation</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">About</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@digitaledge.com">hello@digitaledge.com</a></li><li><a href="tel:+919999999999">+91 99999 99999</a></li><li><a>New Delhi, India</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 DigitalEdge Agency. All rights reserved.</span><span>Privacy Policy · Terms</span></div>
+</footer>
+<script>
+  window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20));
+  const observer=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+  function toggleMenu(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';if(n.style.display==='flex')n.style.cssText='display:flex;flex-direction:column;position:fixed;top:70px;left:0;width:100%;background:white;padding:1.5rem 6%;gap:1rem;border-top:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:99;';else n.style.cssText='';}
+</script>
+</body>
+</html>

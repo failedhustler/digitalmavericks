@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DigitalEdge Agency – We Scale Your Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #060F20;
+    --blue: #1A6BF0;
+    --blue-mid: #1557CC;
+    --blue-light: #EBF2FF;
+    --blue-glow: rgba(26,107,240,0.15);
+    --white: #FFFFFF;
+    --gray: #64748B;
+    --border: #E2ECF8;
+    --text: #1A2540;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%; height: 70px;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(6,15,32,0.08); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--navy); text-decoration: none; letter-spacing: -0.5px; }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--gray); font-size: .93rem; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+  .nav-links .dropdown { position: relative; }
+  .nav-links .dropdown > a::after { content: ' ▾'; font-size: .7rem; }
+  .dropdown-menu {
+    display: none; position: absolute; top: calc(100% + 12px); left: 0;
+    background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+    padding: .6rem; min-width: 220px; box-shadow: 0 12px 40px rgba(6,15,32,0.1);
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a { display: block; padding: .55rem .9rem; border-radius: 8px; color: var(--text); font-size: .88rem; font-weight: 400; }
+  .dropdown-menu a:hover { background: var(--blue-light); color: var(--blue); }
+  .nav-cta { background: var(--blue); color: var(--white) !important; padding: .55rem 1.3rem; border-radius: 50px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--blue-mid) !important; color: var(--white) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: .3s; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 100px 6% 60px;
+    background: linear-gradient(145deg, #f8fbff 0%, #eef4ff 50%, #f0f7ff 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,240,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,240,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { max-width: 680px; position: relative; z-index: 1; animation: fadeUp .8s ease both; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--white); border: 1px solid var(--border);
+    color: var(--blue); font-size: .82rem; font-weight: 600;
+    padding: .4rem 1rem; border-radius: 50px; margin-bottom: 1.8rem;
+    box-shadow: 0 2px 12px rgba(26,107,240,0.08);
+  }
+  .hero-badge span { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; animation: pulse 2s infinite; }
+  .hero h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: var(--navy); margin-bottom: 1.2rem; }
+  .hero h1 em { font-style: normal; color: var(--blue); }
+  .hero p { font-size: 1.1rem; color: var(--gray); line-height: 1.7; margin-bottom: 2.2rem; max-width: 520px; font-weight: 400; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--blue); color: var(--white); padding: .85rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: .95rem; transition: all .25s; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(26,107,240,0.3); }
+  .btn-outline { background: transparent; color: var(--navy); padding: .85rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: .95rem; transition: all .25s; border: 2px solid var(--border); }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+  .hero-stats { display: flex; gap: 2.5rem; margin-top: 3.5rem; }
+  .stat-item h3 { font-size: 2rem; font-weight: 800; color: var(--navy); letter-spacing: -1px; }
+  .stat-item p { font-size: .82rem; color: var(--gray); margin-top: .2rem; }
+  .hero-visual {
+    position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+    width: 420px; height: 420px; border-radius: 24px;
+    background: linear-gradient(135deg, var(--blue) 0%, #0A3FBF 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 40px 80px rgba(26,107,240,0.3); animation: fadeIn 1s ease .3s both;
+  }
+  .hero-visual-inner { text-align: center; color: white; }
+  .hero-visual-inner .icon-big { font-size: 5rem; margin-bottom: 1rem; }
+  .hero-visual-inner p { font-size: 1rem; opacity: .85; font-weight: 500; }
+  .floating-card {
+    position: absolute; background: white; border-radius: 14px;
+    padding: .9rem 1.2rem; box-shadow: 0 10px 40px rgba(6,15,32,0.12);
+    display: flex; align-items: center; gap: .7rem; font-size: .83rem; font-weight: 600; color: var(--navy);
+  }
+  .card-tl { top: -20px; left: -30px; }
+  .card-br { bottom: -10px; right: -20px; }
+  .floating-card .dot { width: 10px; height: 10px; border-radius: 50%; background: #22C55E; }
+
+  /* SECTION COMMONS */
+  section { padding: 90px 6%; }
+  .section-tag { display: inline-block; background: var(--blue-light); color: var(--blue); font-size: .8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: .4rem .9rem; border-radius: 50px; margin-bottom: 1.2rem; }
+  .section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--navy); letter-spacing: -1px; line-height: 1.2; margin-bottom: 1rem; }
+  .section-sub { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 520px; }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-header.centered { text-align: center; }
+  .section-header.centered .section-sub { margin: 0 auto; }
+
+  /* SERVICES GRID */
+  .services-bg { background: var(--navy); }
+  .services-bg .section-title { color: white; }
+  .services-bg .section-sub { color: rgba(255,255,255,0.6); }
+  .services-bg .section-tag { background: rgba(26,107,240,0.3); color: #7EB8FF; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .service-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 2rem; transition: all .3s; text-decoration: none; display: block;
+  }
+  .service-card:hover { background: rgba(26,107,240,0.2); border-color: rgba(26,107,240,0.5); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+  .service-icon { font-size: 2.2rem; margin-bottom: 1.2rem; }
+  .service-card h3 { font-size: 1.15rem; color: white; margin-bottom: .6rem; font-weight: 700; }
+  .service-card p { font-size: .88rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+  .service-arrow { display: inline-flex; align-items: center; gap: .4rem; color: var(--blue); font-size: .83rem; font-weight: 600; margin-top: 1.2rem; }
+  .service-arrow::after { content: '→'; transition: transform .2s; }
+  .service-card:hover .service-arrow::after { transform: translateX(4px); }
+
+  /* WHY US */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .why-visual { position: relative; }
+  .why-img-box {
+    width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--blue-light) 0%, #dbeafe 100%);
+    border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 8rem;
+  }
+  .why-items { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .why-item { display: flex; align-items: flex-start; gap: .8rem; }
+  .why-item .check { width: 22px; height: 22px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: .7rem; flex-shrink: 0; margin-top: 2px; }
+  .why-item p { font-size: .9rem; color: var(--text); font-weight: 500; line-height: 1.5; }
+
+  /* PROCESS */
+  .process-bg { background: var(--blue-light); }
+  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; position: relative; }
+  .process-steps::before {
+    content: ''; position: absolute; top: 30px; left: 0; right: 0; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--blue) 0, var(--blue) 10px, transparent 10px, transparent 20px);
+    z-index: 0;
+  }
+  .step { text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+  .step-num {
+    width: 60px; height: 60px; background: var(--blue); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem;
+    margin: 0 auto 1.2rem; box-shadow: 0 8px 20px rgba(26,107,240,0.3);
+  }
+  .step h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+  .step p { font-size: .85rem; color: var(--gray); line-height: 1.6; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .testimonial-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; }
+  .stars { color: #F59E0B; font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testimonial-card p { font-size: .9rem; color: var(--gray); line-height: 1.7; font-style: italic; margin-bottom: 1.5rem; }
+  .reviewer { display: flex; align-items: center; gap: .8rem; }
+  .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: .9rem; }
+  .reviewer-info h5 { font-size: .9rem; font-weight: 700; color: var(--navy); }
+  .reviewer-info span { font-size: .8rem; color: var(--gray); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, #0A2A6B 100%);
+    border-radius: 28px; padding: 5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    margin: 0 6% 80px; position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,240,0.3) 0%, transparent 70%);
+  }
+  .cta-content { position: relative; z-index: 1; }
+  .cta-banner h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); color: white; font-weight: 800; letter-spacing: -1px; margin-bottom: .8rem; }
+  .cta-banner p { color: rgba(255,255,255,0.65); font-size: 1rem; }
+  .cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-white { background: white; color: var(--blue); padding: .85rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: .95rem; transition: all .25s; white-space: nowrap; }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: rgba(255,255,255,0.7); padding: 70px 6% 30px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand .nav-logo { color: white; font-size: 1.4rem; display: block; margin-bottom: 1rem; }
+  .footer-brand p { font-size: .88rem; line-height: 1.7; max-width: 260px; }
+  .footer-social { display: flex; gap: .8rem; margin-top: 1.5rem; }
+  .social-icon {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center; text-decoration: none;
+    color: rgba(255,255,255,0.6); font-size: .8rem; transition: all .2s;
+  }
+  .social-icon:hover { background: var(--blue); border-color: var(--blue); color: white; }
+  .footer-col h4 { font-family: 'Syne', sans-serif; font-size: .95rem; color: white; font-weight: 700; margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: .7rem; }
+  .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.55); font-size: .87rem; transition: color .2s; }
+  .footer-col ul li a:hover { color: white; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: .82rem; color: rgba(255,255,255,0.35); flex-wrap: wrap; gap: 1rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .fade-in { opacity: 0; transform: translateY(25px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-visual { display: none; }
+    .hero h1 { font-size: 2.6rem; }
+    .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cta-banner { flex-direction: column; padding: 3rem 2rem; margin: 0 4% 60px; }
+    .process-steps::before { display: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 5%; }
+    .hero { padding: 90px 5% 50px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Digital<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li class="dropdown">
+      <a href="#">Services</a>
+      <div class="dropdown-menu">
+        <a href="social-media-marketing.html">📱 Social Media Marketing</a>
+        <a href="seo.html">🔍 SEO Optimization</a>
+        <a href="website-development.html">💻 Website Development</a>
+        <a href="lead-generation.html">🎯 Lead Generation</a>
+      </div>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Digital Growth Agency</div>
+    <h1>We <em>Scale</em> Your<br>Business Online</h1>
+    <p>From social media domination to top Google rankings — DigitalEdge crafts data-driven strategies that turn browsers into buyers.</p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary">Start Growing Today</a>
+      <a href="portfolio.html" class="btn-outline">View Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><h3>150+</h3><p>Clients Served</p></div>
+      <div class="stat-item"><h3>3.2x</h3><p>Avg. ROI</p></div>
+      <div class="stat-item"><h3>98%</h3><p>Retention Rate</p></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="floating-card card-tl"><div class="dot"></div> Campaign Live</div>
+    <div class="hero-visual-inner">
+      <div class="icon-big">📈</div>
+      <p>Your growth starts here</p>
+    </div>
+    <div class="floating-card card-br">🎯 +340% Leads</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-bg">
+  <div class="section-header centered">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-title">Services Built to Dominate</h2>
+    <p class="section-sub">Everything your business needs to win in the digital space — under one roof.</p>
+  </div>
+  <div class="services-grid fade-in">
+    <a href="social-media-marketing.html" class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Social Media Marketing</h3>
+      <p>Build a loyal following and drive engagement across Instagram, Facebook, LinkedIn, and more.</p>
+      <div class="service-arrow">Learn more</div>
+    </a>
+    <a href="seo.html" class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>SEO Optimization</h3>
+      <p>Rank on Page 1 of Google with technical SEO, content strategy, and authority link building.</p>
+      <div class="service-arrow">Learn more</div>
+    </a>
+    <a href="website-development.html" class="service-card">
+      <div class="service-icon">💻</div>
+      <h3>Website Development</h3>
+      <p>High-converting, fast, and beautifully designed websites that work hard for your business.</p>
+      <div class="service-arrow">Learn more</div>
+    </a>
+    <a href="lead-generation.html" class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3>Lead Generation</h3>
+      <p>Targeted paid campaigns and funnels that bring in qualified leads ready to convert.</p>
+      <div class="service-arrow">Learn more</div>
+    </a>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="why-grid">
+    <div class="why-visual fade-in">
+      <div class="why-img-box">🚀</div>
+    </div>
+    <div class="fade-in">
+      <div class="section-tag">Why DigitalEdge</div>
+      <h2 class="section-title">Results Over Everything</h2>
+      <p class="section-sub" style="margin-bottom:2rem;">We don't just run campaigns — we build growth engines. Our team combines creativity with data to deliver measurable results every single month.</p>
+      <div class="why-items">
+        <div class="why-item"><div class="check">✓</div><p>Data-driven strategies</p></div>
+        <div class="why-item"><div class="check">✓</div><p>Dedicated account manager</p></div>
+        <div class="why-item"><div class="check">✓</div><p>Transparent reporting</p></div>
+        <div class="why-item"><div class="check">✓</div><p>No lock-in contracts</p></div>
+        <div class="why-item"><div class="check">✓</div><p>ROI-focused campaigns</p></div>
+        <div class="why-item"><div class="check">✓</div><p>24/7 support access</p></div>
+      </div>
+      <a href="contact.html" class="btn-primary" style="margin-top:2rem; display:inline-block;">Book a Free Audit</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-bg">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">How We Work</div>
+    <h2 class="section-title">Our 4-Step Process</h2>
+    <p class="section-sub">Simple, transparent, and focused on results from day one.</p>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="step"><div class="step-num">1</div><h4>Discovery</h4><p>We audit your current digital presence and understand your goals.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Strategy</h4><p>A custom roadmap is built around your brand, audience, and budget.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Execution</h4><p>Our team launches campaigns with precision and creative excellence.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Optimize</h4><p>We track, report, and refine — consistently improving your results.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Client Love</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+  </div>
+  <div class="testimonials-grid fade-in">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"DigitalEdge tripled our inbound leads in just 4 months. Their SEO work is second to none — we're now on Page 1 for our top 10 keywords."</p>
+      <div class="reviewer"><div class="reviewer-avatar">SR</div><div class="reviewer-info"><h5>Siddharth Rao</h5><span>CEO, TechNova Solutions</span></div></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"Our Instagram following went from 2K to 45K in 6 months, and our online sales jumped 220%. Absolutely incredible team to work with."</p>
+      <div class="reviewer"><div class="reviewer-avatar">PM</div><div class="reviewer-info"><h5>Priya Mehta</h5><span>Founder, Bloom Skincare</span></div></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p>"The website they built for us converts at 4x our old one. Fast, beautiful, and optimized. Best investment we've made for our business."</p>
+      <div class="reviewer"><div class="reviewer-avatar">AK</div><div class="reviewer-info"><h5>Arjun Kapoor</h5><span>Director, Summit Realty</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner fade-in">
+  <div class="cta-content">
+    <h2>Ready to Grow Your Business?</h2>
+    <p>Get a free digital audit and strategy session — no strings attached.</p>
+  </div>
+  <div class="cta-btns">
+    <a href="contact.html" class="btn-white">Book Free Audit</a>
+    <a href="portfolio.html" class="btn-outline" style="color:rgba(255,255,255,0.8); border-color:rgba(255,255,255,0.3);">See Our Work</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">Digital<span style="color:var(--blue)">Edge</span></a>
+      <p>We help businesses grow through smart, data-driven digital marketing strategies that deliver real results.</p>
+      <div class="footer-social">
+        <a href="#" class="social-icon" title="Instagram">IG</a>
+        <a href="#" class="social-icon" title="LinkedIn">in</a>
+        <a href="#" class="social-icon" title="Facebook">fb</a>
+        <a href="#" class="social-icon" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="social-media-marketing.html">Social Media</a></li>
+        <li><a href="seo.html">SEO</a></li>
+        <li><a href="website-development.html">Web Development</a></li>
+        <li><a href="lead-generation.html">Lead Generation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@digitaledge.com">hello@digitaledge.com</a></li>
+        <li><a href="tel:+919999999999">+91 99999 99999</a></li>
+        <li><a href="#">New Delhi, India</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DigitalEdge Agency. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function toggleMenu() {
+    const nav = document.querySelector('.nav-links');
+    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    if (nav.style.display === 'flex') {
+      nav.style.cssText = 'display:flex; flex-direction:column; position:fixed; top:70px; left:0; width:100%; background:white; padding:1.5rem 6%; gap:1rem; border-top:1px solid var(--border); box-shadow:0 10px 30px rgba(0,0,0,0.1); z-index:99;';
+    } else { nav.style.cssText = ''; }
+  }
+</script>
+</body>
+</html>
