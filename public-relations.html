@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Public Relations – Digital Marketing Edge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#060F20;--blue:#1A6BF0;--blue-mid:#1557CC;--blue-light:#EBF2FF;--white:#FFFFFF;--gray:#64748B;--border:#E2ECF8;--text:#1A2540;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:70px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+  nav.scrolled{box-shadow:0 4px 30px rgba(6,15,32,0.08);}
+  .nav-logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1rem;color:var(--navy);text-decoration:none;letter-spacing:-0.5px;}
+  .nav-logo span{color:var(--blue);}
+  .nav-links{display:flex;gap:2rem;align-items:center;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--gray);font-size:.93rem;font-weight:500;transition:color .2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--blue);}
+  .nav-links .dropdown{position:relative;}
+  .nav-links .dropdown>a::after{content:' ▾';font-size:.7rem;}
+  .dropdown-menu{display:none;position:absolute;top:100%;padding-top:12px;left:0;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.6rem;min-width:240px;box-shadow:0 12px 40px rgba(6,15,32,0.1);}
+  .dropdown:hover .dropdown-menu{display:block;}
+  .dropdown-menu a{display:block;padding:.55rem .9rem;border-radius:8px;color:var(--text);font-size:.88rem;font-weight:400;}
+  .dropdown-menu a:hover{background:var(--blue-light);color:var(--blue);}
+  .nav-cta{background:var(--blue);color:var(--white)!important;padding:.55rem 1.3rem;border-radius:50px;font-weight:600!important;}
+  .nav-cta:hover{background:var(--blue-mid)!important;color:var(--white)!important;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;}
+
+  /* PAGE HERO */
+  .page-hero{padding:130px 6% 80px;background:linear-gradient(145deg,#f8fbff 0%,#eef4ff 60%,#f0f7ff 100%);position:relative;overflow:hidden;}
+  .page-hero::before{content:'';position:absolute;top:-150px;right:-150px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,240,0.1) 0%,transparent 70%);}
+  .breadcrumb{font-size:.82rem;color:var(--gray);margin-bottom:1.5rem;}
+  .breadcrumb a{color:var(--blue);text-decoration:none;}
+  .breadcrumb a::after{content:' / ';color:var(--gray);}
+  .page-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;animation:fadeUp .8s ease both;}
+  .page-hero h1{font-size:clamp(2.2rem,4vw,3.6rem);font-weight:800;letter-spacing:-1.5px;color:var(--navy);line-height:1.1;margin-bottom:1.2rem;}
+  .page-hero h1 em{font-style:normal;color:var(--blue);}
+  .page-hero p{font-size:1.05rem;color:var(--gray);line-height:1.7;margin-bottom:2rem;}
+
+  /* HERO CARD */
+  .hero-card{background:var(--navy);border-radius:24px;padding:2.5rem;color:white;}
+  .hero-card h3{font-size:1rem;margin-bottom:1.5rem;opacity:.7;font-weight:500;}
+  .metric-row{display:flex;gap:1.5rem;margin-bottom:.8rem;}
+  .metric{flex:1;background:rgba(255,255,255,0.07);border-radius:14px;padding:1.2rem;text-align:center;}
+  .metric .num{font-size:1.8rem;font-weight:800;color:var(--blue);}
+  .metric .label{font-size:.75rem;opacity:.6;margin-top:.3rem;}
+  .media-logos{margin-top:1.5rem;}
+  .media-logos p{font-size:.78rem;opacity:.5;margin-bottom:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:1px;}
+  .logo-row{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .media-tag{background:rgba(255,255,255,0.08);color:rgba(255,255,255,.8);font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:6px;border:1px solid rgba(255,255,255,.1);}
+
+  /* SECTIONS */
+  section{padding:80px 6%;}
+  .section-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.4rem .9rem;border-radius:50px;margin-bottom:1.2rem;}
+  .section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:var(--navy);letter-spacing:-1px;line-height:1.2;margin-bottom:1rem;}
+  .section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:520px;}
+  .section-header{margin-bottom:3rem;}
+  .section-header.centered{text-align:center;}
+  .section-header.centered .section-sub{margin:0 auto;}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+  .feature-card{border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all .3s;}
+  .feature-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,107,240,.1);transform:translateY(-4px);}
+  .feature-icon{font-size:2rem;margin-bottom:1rem;}
+  .feature-card h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;}
+  .feature-card p{font-size:.87rem;color:var(--gray);line-height:1.65;}
+
+  /* PR SERVICES DETAIL */
+  .services-detail{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .service-detail-card{background:var(--navy);border-radius:20px;padding:2rem;color:white;position:relative;overflow:hidden;transition:transform .3s;}
+  .service-detail-card:hover{transform:translateY(-5px);}
+  .service-detail-card::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:rgba(26,107,240,.15);}
+  .service-detail-card .svc-icon{font-size:2.5rem;margin-bottom:1.2rem;position:relative;z-index:1;}
+  .service-detail-card h3{font-size:1.15rem;font-weight:800;color:white;margin-bottom:.8rem;position:relative;z-index:1;}
+  .service-detail-card p{font-size:.87rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:1.2rem;position:relative;z-index:1;}
+  .service-detail-card ul{list-style:none;position:relative;z-index:1;}
+  .service-detail-card ul li{font-size:.83rem;color:rgba(255,255,255,.7);padding:.3rem 0;display:flex;gap:.6rem;align-items:flex-start;}
+  .service-detail-card ul li::before{content:'→';color:var(--blue);font-weight:700;flex-shrink:0;}
+
+  /* PACKAGES */
+  .packages-bg{background:var(--navy);}
+  .packages-bg .section-title{color:white;}
+  .packages-bg .section-sub{color:rgba(255,255,255,.6);}
+  .packages-bg .section-tag{background:rgba(26,107,240,.3);color:#7EB8FF;}
+  .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+  .package-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem;position:relative;}
+  .package-card.popular{border-color:var(--blue);background:rgba(26,107,240,.15);}
+  .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:white;font-size:.75rem;font-weight:700;padding:.3rem .9rem;border-radius:50px;white-space:nowrap;}
+  .package-card h3{font-size:1.2rem;color:white;font-weight:800;margin-bottom:.5rem;}
+  .package-desc{font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:.5rem;}
+  .package-price{font-size:2.2rem;font-weight:800;color:var(--blue);margin:.8rem 0;}
+  .package-price span{font-size:.9rem;color:rgba(255,255,255,.5);font-weight:400;}
+  .package-card ul{list-style:none;margin:1.2rem 0 1.8rem;}
+  .package-card ul li{font-size:.87rem;color:rgba(255,255,255,.7);padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;gap:.6rem;}
+  .package-card ul li::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0;}
+  .btn-package{display:block;text-align:center;padding:.75rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.9rem;transition:all .25s;font-family:'Plus Jakarta Sans',sans-serif;}
+  .btn-package-solid{background:var(--blue);color:white;}
+  .btn-package-solid:hover{background:var(--blue-mid);transform:translateY(-2px);}
+  .btn-package-outline{border:1px solid rgba(255,255,255,.25);color:white;}
+  .btn-package-outline:hover{border-color:var(--blue);background:rgba(26,107,240,.2);}
+
+  /* PROCESS */
+  .process-bg{background:var(--blue-light);}
+  .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;}
+  .step{text-align:center;padding:0 .5rem;}
+  .step-num{width:56px;height:56px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;margin:0 auto 1rem;box-shadow:0 8px 20px rgba(26,107,240,.3);}
+  .step h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;}
+  .step p{font-size:.83rem;color:var(--gray);line-height:1.6;}
+
+  /* CTA */
+  .btn-primary{background:var(--blue);color:var(--white);padding:.85rem 2rem;border-radius:50px;font-weight:600;text-decoration:none;font-size:.95rem;transition:all .25s;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;}
+  .btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,107,240,.3);}
+  .btn-white{background:white;color:var(--blue);padding:.85rem 2rem;border-radius:50px;font-weight:700;text-decoration:none;font-size:.95rem;transition:all .25s;white-space:nowrap;}
+  .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.2);}
+  .cta-banner{background:linear-gradient(135deg,var(--navy) 0%,#0A2A6B 100%);border-radius:28px;padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;position:relative;overflow:hidden;}
+  .cta-banner::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,240,.3) 0%,transparent 70%);}
+  .cta-content{position:relative;z-index:1;}
+  .cta-banner h2{font-size:clamp(1.5rem,2.5vw,2.2rem);color:white;font-weight:800;letter-spacing:-1px;margin-bottom:.6rem;}
+  .cta-banner p{color:rgba(255,255,255,.65);font-size:.95rem;}
+  .cta-btns{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:1;}
+
+  /* FOOTER */
+  footer{background:var(--navy);color:rgba(255,255,255,.7);padding:70px 6% 30px;font-family:'Plus Jakarta Sans',sans-serif;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+  .footer-brand p{font-size:.88rem;line-height:1.7;max-width:260px;margin-top:1rem;}
+  .footer-social{display:flex;gap:.8rem;margin-top:1.5rem;}
+  .social-icon{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(255,255,255,.6);font-size:.8rem;transition:all .2s;}
+  .social-icon:hover{background:var(--blue);border-color:var(--blue);color:white;}
+  .footer-col h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;color:white;font-weight:700;margin-bottom:1.2rem;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:.7rem;}
+  .footer-col ul li a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.87rem;transition:color .2s;}
+  .footer-col ul li a:hover{color:white;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;display:flex;justify-content:space-between;font-size:.82rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:1rem;font-family:'Plus Jakarta Sans',sans-serif;}
+
+  /* ANIMATIONS */
+  .fade-in{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:none;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none;}.hamburger{display:flex;}
+    .page-hero-inner{grid-template-columns:1fr;}
+    .services-detail{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .cta-banner{flex-direction:column;padding:2.5rem;}
+  }
+  @media(max-width:600px){section{padding:60px 5%;}.footer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">DIGITAL MARKETING<span>Edge</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="#" class="active">Services</a>
+      <div class="dropdown-menu">
+        <a href="social-media-marketing.html">📱 Social Media Marketing</a>
+        <a href="seo.html">🔍 SEO Optimization</a>
+        <a href="website-development.html">💻 Website Development</a>
+        <a href="lead-generation.html">🎯 Lead Generation</a>
+        <a href="public-relations.html">📣 Public Relations</a>
+      </div>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div style="padding:0 0 2rem;">
+    <div class="breadcrumb"><a href="index.html">Home</a><a href="#">Services</a>Public Relations</div>
+  </div>
+  <div class="page-hero-inner">
+    <div>
+      <div class="section-tag">Public Relations</div>
+      <h1>Build a Brand the <em>World Talks About</em></h1>
+      <p>From press coverage to event management — we craft compelling PR strategies that put your brand in the spotlight and build lasting public trust.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary">Get a Free PR Consultation</a>
+        <a href="portfolio.html" style="display:inline-flex;align-items:center;gap:.5rem;color:var(--blue);font-weight:600;text-decoration:none;font-size:.95rem;">See Case Studies →</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Average Client Results</h3>
+      <div class="metric-row">
+        <div class="metric"><div class="num">80+</div><div class="label">Media Placements</div></div>
+        <div class="metric"><div class="num">5x</div><div class="label">Brand Visibility</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="num">200+</div><div class="label">Press Releases</div></div>
+        <div class="metric"><div class="num">95%</div><div class="label">Client Retention</div></div>
+      </div>
+      <div class="media-logos">
+        <p>Featured In</p>
+        <div class="logo-row">
+          <span class="media-tag">Times of India</span>
+          <span class="media-tag">Economic Times</span>
+          <span class="media-tag">Hindustan Times</span>
+          <span class="media-tag">NDTV</span>
+          <span class="media-tag">Forbes India</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE OFFER -->
+<section>
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Our PR Services</div>
+    <h2 class="section-title">Everything You Need to Own the Narrative</h2>
+    <p class="section-sub">A complete PR toolkit designed to build your brand reputation, generate media buzz, and position you as an industry leader.</p>
+  </div>
+  <div class="services-detail fade-in">
+    <div class="service-detail-card">
+      <div class="svc-icon">🗺️</div>
+      <h3>PR Strategy & Planning</h3>
+      <p>A tailored PR roadmap built around your brand goals, target audience, and media landscape — ensuring every effort drives measurable impact.</p>
+      <ul>
+        <li>Brand positioning & messaging framework</li>
+        <li>Target media & audience mapping</li>
+        <li>Monthly PR calendar planning</li>
+        <li>KPI setting & performance tracking</li>
+        <li>Competitor PR analysis</li>
+      </ul>
+    </div>
+    <div class="service-detail-card">
+      <div class="svc-icon">📰</div>
+      <h3>Media Outreach & Press Coverage</h3>
+      <p>We leverage our extensive media network to get your brand featured in top publications, news channels, podcasts, and digital media outlets.</p>
+      <ul>
+        <li>Journalist & editor relationship building</li>
+        <li>Story pitching to national & regional media</li>
+        <li>TV, print, radio & digital placements</li>
+        <li>Interview & quote facilitation</li>
+        <li>Media monitoring & clipping reports</li>
+      </ul>
+    </div>
+    <div class="service-detail-card">
+      <div class="svc-icon">✍️</div>
+      <h3>Press Release Writing</h3>
+      <p>Professionally crafted press releases that tell your story compellingly, follow media standards, and get picked up by journalists and news outlets.</p>
+      <ul>
+        <li>Product & service launch announcements</li>
+        <li>Award & milestone press releases</li>
+        <li>Event & campaign announcements</li>
+        <li>SEO-optimised for online distribution</li>
+        <li>Wire distribution to 500+ outlets</li>
+      </ul>
+    </div>
+    <div class="service-detail-card">
+      <div class="svc-icon">🎪</div>
+      <h3>Event PR & Management</h3>
+      <p>From product launches to press conferences — we plan, promote, and execute events that generate media buzz and leave a lasting brand impression.</p>
+      <ul>
+        <li>Press conference planning & execution</li>
+        <li>Product launch event management</li>
+        <li>Media invitations & RSVP management</li>
+        <li>On-site PR coordination</li>
+        <li>Post-event media coverage follow-up</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY PR MATTERS -->
+<section style="background:var(--blue-light);">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Why PR Matters</div>
+    <h2 class="section-title">PR is the Most Trusted Form of Marketing</h2>
+    <p class="section-sub">Consumers trust editorial coverage 5x more than paid advertising. PR builds the credibility that no ad budget can buy.</p>
+  </div>
+  <div class="features-grid fade-in">
+    <div class="feature-card" style="background:white;">
+      <div class="feature-icon">🏆</div>
+      <h3>Build Brand Credibility</h3>
+      <p>Third-party media coverage instantly positions your brand as trustworthy and authoritative in your industry.</p>
+    </div>
+    <div class="feature-card" style="background:white;">
+      <div class="feature-icon">📡</div>
+      <h3>Massive Reach</h3>
+      <p>A single placement in a top publication can reach millions — far beyond what paid ads can achieve at the same cost.</p>
+    </div>
+    <div class="feature-card" style="background:white;">
+      <div class="feature-icon">🔍</div>
+      <h3>SEO Benefits</h3>
+      <p>Press coverage generates high-authority backlinks that boost your Google rankings alongside your PR results.</p>
+    </div>
+    <div class="feature-card" style="background:white;">
+      <div class="feature-icon">🛡️</div>
+      <h3>Reputation Management</h3>
+      <p>Proactive PR builds a strong brand reputation that protects your business and helps you control your public narrative.</p>
+    </div>
+    <div class="feature-card" style="background:white;">
+      <div class="feature-icon">💼</div>
+      <h3>Investor & Partner Trust</h3>
+      <p>Media coverage attracts investors, partners, and top talent who see your brand featured in credible publications.</p>
+    </div>
+    <div class="feature-card" style="background:white;">
+      <div class="feature-icon">📈</div>
+      <h3>Long-Term Brand Equity</h3>
+      <p>Unlike ads that stop when you stop paying, PR coverage lives online forever — continuously building your brand value.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING PACKAGES -->
+<section class="packages-bg">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">PR Packages</div>
+    <h2 class="section-title">Transparent PR Pricing</h2>
+    <p class="section-sub">No hidden fees. Choose the plan that matches your brand ambitions and growth stage.</p>
+  </div>
+  <div class="packages-grid fade-in">
+    <div class="package-card">
+      <h3>Starter PR</h3>
+      <p class="package-desc">For growing businesses building their first PR presence</p>
+      <div class="package-price">₹20,000<span>/month</span></div>
+      <ul>
+        <li>2 Press Releases per month</li>
+        <li>Media outreach to 20+ journalists</li>
+        <li>PR strategy & messaging document</li>
+        <li>Monthly media coverage report</li>
+        <li>3–5 guaranteed media placements</li>
+      </ul>
+      <a href="contact.html" class="btn-package btn-package-outline">Get Started</a>
+    </div>
+    <div class="package-card popular">
+      <div class="popular-badge">Most Popular</div>
+      <h3>Growth PR</h3>
+      <p class="package-desc">For brands ready to dominate their industry narrative</p>
+      <div class="package-price">₹40,000<span>/month</span></div>
+      <ul>
+        <li>4 Press Releases per month</li>
+        <li>Media outreach to 60+ journalists</li>
+        <li>National & digital media targeting</li>
+        <li>1 Event PR support per quarter</li>
+        <li>8–12 guaranteed media placements</li>
+        <li>Bi-weekly strategy & reporting calls</li>
+        <li>Wire distribution to 500+ outlets</li>
+      </ul>
+      <a href="contact.html" class="btn-package btn-package-solid">Get Started</a>
+    </div>
+    <div class="package-card">
+      <h3>Enterprise PR</h3>
+      <p class="package-desc">For established brands seeking maximum media impact</p>
+      <div class="package-price">Custom</div>
+      <ul>
+        <li>Unlimited press releases</li>
+        <li>National TV & top-tier print targeting</li>
+        <li>Full event PR & management</li>
+        <li>Crisis communications support</li>
+        <li>Dedicated PR manager</li>
+        <li>Real-time media monitoring dashboard</li>
+        <li>20+ guaranteed placements/month</li>
+      </ul>
+      <a href="contact.html" class="btn-package btn-package-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PROCESS -->
+<section class="process-bg">
+  <div class="section-header centered fade-in">
+    <div class="section-tag">Our Process</div>
+    <h2 class="section-title">How We Build Your PR Presence</h2>
+    <p class="section-sub">A structured, proven approach that delivers consistent media coverage and measurable brand growth.</p>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Brand Audit</h4>
+      <p>We study your brand, industry, competitors, and current public perception to build the right strategy.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Story Crafting</h4>
+      <p>We identify your most compelling brand stories and develop key messages that resonate with media and audiences.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Media Outreach</h4>
+      <p>We pitch your stories to our network of journalists, editors, and media outlets for maximum coverage.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Monitor & Report</h4>
+      <p>We track all coverage, measure impact, and refine the strategy monthly to keep your PR growing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="cta-banner fade-in">
+    <div class="cta-content">
+      <h2>Ready to Get Your Brand in the News?</h2>
+      <p>Book a free PR consultation and find out where your brand could be featured.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-white">Book Free PR Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="color:white;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;text-decoration:none;font-size:1rem;">DIGITAL MARKETING<span style="color:var(--blue)">Edge</span></a>
+      <p>We help businesses grow through smart, data-driven digital marketing and PR strategies that deliver real results.</p>
+      <div class="footer-social">
+        <a href="#" class="social-icon">IG</a>
+        <a href="#" class="social-icon">in</a>
+        <a href="#" class="social-icon">fb</a>
+        <a href="#" class="social-icon">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="social-media-marketing.html">Social Media</a></li>
+        <li><a href="seo.html">SEO</a></li>
+        <li><a href="website-development.html">Web Development</a></li>
+        <li><a href="lead-generation.html">Lead Generation</a></li>
+        <li><a href="public-relations.html">Public Relations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@digitalmarketingedge.com">hello@digitalmarketingedge.com</a></li>
+        <li><a href="tel:+919999999999">+91 99999 99999</a></li>
+        <li><a>New Delhi, India</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Digital Marketing Edge. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20));
+  const observer=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+  function toggleMenu(){
+    const n=document.querySelector('.nav-links');
+    n.style.display=n.style.display==='flex'?'none':'flex';
+    if(n.style.display==='flex')n.style.cssText='display:flex;flex-direction:column;position:fixed;top:70px;left:0;width:100%;background:white;padding:1.5rem 6%;gap:1rem;border-top:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:99;';
+    else n.style.cssText='';
+  }
+</script>
+</body>
+</html>
